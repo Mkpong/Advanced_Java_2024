@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USGS Earthquakes</title>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+          crossorigin=""></script>
+  <script src="LoadData.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+</head>
+
+<body>
+  <!--제목-->
+  <div class="table-caption">
+    <img src="logo.png" class="mainImg">
+    <caption>Earthquake (Magnitude Over 8)</caption>
+  </div>
+
+  <!--지도-->
+  <div id="map"></div>
+
+  <!--Search Bar-->
+  <div class="searchButton-container">
+    <input type="text" id="textBox" placeholder="Enter your search">
+    <select id="dropdown">
+        <option value="option1">Date(ascending)</option>
+        <option value="option2">Date(decending)</option>
+        <option value="option3">Magnitude(ascending)</option>
+        <option value="option4">Magnitude(decending)</option>
+    </select>
+    <button id="searchButton" onclick="fetchEarthquakeData()">Search</button>
+  </div>
+
+  <!--표-->
+  <div class="table-container">
+  <table>
+    <thead>
+        <th>Index</th>
+        <th>Place</th>
+        <th>Magnitude</th>
+        <th>Time</th>
+    </thead>
+    <tbody id="earthquakeList">
+    </tbody>
+  </table>
+  </div>
+  
+  <!--하단 바-->
+  <footer>
+    <div class="footer-content">
+        <p>Copyright © 2024. All rights reserved. Advanced Java 2024</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+.table-caption {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainImg{
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+.table-container {
+    text-align: center;
+    height: 600px;
+    width: 80%;
+    overflow-y: auto;
+    margin: 10px auto;
+    max-width: 1300px;
+}
+
+.searchButton-container {
+    margin: 0 auto;
+    text-align: right;
+    margin-bottom: 10px;
+    width: 80%;
+    max-width: 1300px;
+}
+
+.footer-content {
+    text-align: center;
+    margin: 30px 0px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 2px solid black;
+}
+
+#map {
+    width: 1000px; /* 원하는 크기로 설정 */
+    height: 600px; /* 원하는 크기로 설정 */
+    margin: 20px auto;
+}
+
+input {
+    width: 200px;
+}
