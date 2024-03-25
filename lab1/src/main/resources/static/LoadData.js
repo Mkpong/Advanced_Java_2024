@@ -1,12 +1,13 @@
-// API로부터 JSON 데이터를 불러오는 함수
+// Get JSON data via API call
 function fetchEarthquakeData() {
+  // earthquake data를 불러오기 위한 주소
   const url = "https://earthquake.usgs.gov/fdsnws/event/1/query.geojson?starttime=1900-01-01%2000:00:00&minmagnitude=8&orderby=time";
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      displayEarthquakeData(data.features);
-      markingEarthquakeSpot(data.features);
+      displayEarthquakeData(data.features); // 테이블 데이터 생성 함수 호출
+      markingEarthquakeSpot(data.features); // 지도에 마커 생성 함수 호출
     })
     .catch(error => console.error('Error fetching earthquake data:', error));
 }
@@ -14,11 +15,11 @@ function fetchEarthquakeData() {
 var marker = [];
 var map;
 
-// JSON 데이터를 HTML로 변환하여 표시하는 함수
+// JSON data parsing & Show Table
 function displayEarthquakeData(earthquakeData) {
-
+  //earthquakeList ID에 해당 데이터 반환
   const earthquakeListElement = document.getElementById("earthquakeList");
-  earthquakeListElement.innerHTML = ""; // 기존 내용을 지웁니다.
+  earthquakeListElement.innerHTML = "";
 
   //earthquakeData Sorting
   const mySelecting = document.getElementById("dropdown").selectedIndex;
@@ -41,13 +42,12 @@ function displayEarthquakeData(earthquakeData) {
   }
 
   var index = 1;
+  // Create table elements
   earthquakeData.forEach(earthquake => {
-    // const earthquakeTitle = earthquake.properties.title;
     const earthquakePlace = earthquake.properties.place;
     const earthquakeMagnitude = earthquake.properties.mag;
     const earthquakeTime = new Date(earthquake.properties.time).toUTCString();
     const earthquakeDetailURL = earthquake.properties.url;
-    // <td><a href="${earthquakeDetailURL}" target="_blank">More details</a></td>
     const listItem = document.createElement("tr");
     listItem.innerHTML = `
       <td>${index}</td>
@@ -55,35 +55,61 @@ function displayEarthquakeData(earthquakeData) {
       <td>${earthquakeMagnitude}</td>
       <td>${earthquakeTime}</td>
     `;
+    // 테이블 row에 데이터 추가
     earthquakeListElement.appendChild(listItem);
     index += 1;
   });
 }
 
+// Loading maps using the leaflet library
 function loadingMap(){
-    map = L.map('map').setView([37.5665, 126.9780], 13); // 서울을 중심으로 지도 생성
+    // 서울 중심으로 확대 level=13 지도 초기화
+    map = L.map('map').setView([37.5665, 126.9780], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 }
 
+// Make Mark & Show Popup(Click)
 function markingEarthquakeSpot(earthquakeData) {
     marker = []
+    // marking process
     earthquakeData.forEach(earthquake => {
+      var img_url = '';
+      if(earthquake.properties.mag < 8.5) img_url = './images/green_dark.png';
+      else if(earthquake.properties.mag < 9) img_url = 'images/orange.png';
+      else img_url = './images/red.png';
+      // Create custom Icon - Color circle & Show mag Data
+      var customIcon = L.divIcon({
+        className: 'custom-div-icon',
+        html: `
+          <div class="icon-container">
+          <img src="${img_url}" style="width: 40px; height: 40px; border-radius: 50%;">
+          <div class="icon-text">${earthquake.properties.mag}</div>
+          </div>`,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+        popupAnchor: [0, -20]
+    });
+        // JSON 데이터에서 위도, 경도값 불러오기
         coordinate = [earthquake.geometry.coordinates[1], earthquake.geometry.coordinates[0]];
-        mark = L.marker(coordinate).addTo(map);
+        // add marker
+        mark = L.marker(coordinate, {icon: customIcon}).addTo(map);
+        // 해당 마커에 bindpopup option 추가
         mark.bindPopup(`
             <div style="font-size: 15px; margin: 0;">
             <p>Place: ${earthquake.properties.place}</p>
             <p>Mag: ${earthquake.properties.mag}</p>
             <p>Date: ${new Date(earthquake.properties.time).toUTCString()}</p>
+            <p>More Detail: <a href="${earthquake.properties.url}">more..</a></p>
             </div>
-        `)
+        `);
+        
         marker.push(mark);
     });
 
 }
 
-// 페이지 로드 시 데이터 불러오기
+// Load data on page load
 document.addEventListener("DOMContentLoaded", loadingMap);
 document.addEventListener("DOMContentLoaded", fetchEarthquakeData);

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/title_mark.jpg" type="image/jpg">
   <title>USGS Earthquakes</title>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
           integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -15,28 +16,31 @@
 </head>
 
 <body>
-  <!--제목-->
+  <!--Title-->
   <div class="table-caption">
-    <img src="logo.png" class="mainImg">
+    <img src="./images/logo.png" class="mainImg">
     <caption>Earthquake (Magnitude Over 8)</caption>
   </div>
 
-  <!--지도-->
+  <!--Map-->
   <div id="map"></div>
 
   <!--Search Bar-->
   <div class="searchButton-container">
+    <!--검색 기능 추후 SpringBoot(Thymeleaf) 사용 시 구현 예정-->
     <input type="text" id="textBox" placeholder="Enter your search">
+    <!--정렬 기준 설정(초기값 날짜 오름차순)-->
     <select id="dropdown">
         <option value="option1">Date(ascending)</option>
-        <option value="option2">Date(decending)</option>
+        <option value="option2">Date(descending)</option>
         <option value="option3">Magnitude(ascending)</option>
-        <option value="option4">Magnitude(decending)</option>
+        <option value="option4">Magnitude(descending)</option>
     </select>
+    <!--Search 클릭 시 fetchEarthquakeData 함수 호출-->
     <button id="searchButton" onclick="fetchEarthquakeData()">Search</button>
   </div>
 
-  <!--표-->
+  <!--Table-->
   <div class="table-container">
   <table>
     <thead>
@@ -45,12 +49,13 @@
         <th>Magnitude</th>
         <th>Time</th>
     </thead>
+    <!--tbody에는 earthquakeList 호출-->
     <tbody id="earthquakeList">
     </tbody>
   </table>
   </div>
   
-  <!--하단 바-->
+  <!--Bottom Bar-->
   <footer>
     <div class="footer-content">
         <p>Copyright © 2024. All rights reserved. Advanced Java 2024</p>
