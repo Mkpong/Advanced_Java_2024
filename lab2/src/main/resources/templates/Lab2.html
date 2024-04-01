@@ -16,9 +16,12 @@
 </head>
 
 <body>
-    <div class="container-xl">
+    <div class="container-fluid">
         <!--Header부분으로 activateLink값을 넘겨주어 해당 Nav 요소를 활성화한다.(클릭 효과)-->
         <header th:replace="~{navbar::navbar(activeLink='home')}"></header>
+        <div class="col-md-3 col-lg-1" style="margin-top: 20px; margin-bottom: 10px;">
+          <sidebar th:replace="~{sidebar::sidebar}"></sidebar>
+        </div>
         
         <footer th:replace="~{footer::footer}"></footer>
     </div>

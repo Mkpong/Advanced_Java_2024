@@ -4,38 +4,17 @@ import lombok.Data;
 
 @Data
 public class EarthquakeDTO {
-    private String type;
-    private Properties properties;
-    private Geometry geometry;
 
-    @Data
-    public static class Properties {
-        private double mag;
-        // private String place;
-        // private long time;
-        // private String url;
-        // private String detail;
-        // private double mmi;
-        // private String status;
-        // private int tsunami;
-        // private int sig;
-        // private String net;
-        // private String code;
-        // private String ids;
-        // private String sources;
-        // private String types;
-        // private String magType;
-        // private String title;
+    public EarthquakeDTO(String place, Double mag, String time, String url) {
+        this.place = place;
+        this.mag = mag;
+        this.time = time;
+        this.url = url;
     }
 
-    @Data
-    public static class Coordinates {
-        private Coordinates coordinates;
-    }
+    private String place;
+    private double mag;
+    private String time;
+    private String url;
 
-    @Data
-    public static class Geometry {
-        private String type;
-        private Coordinates coordinates;
-    }
 }
