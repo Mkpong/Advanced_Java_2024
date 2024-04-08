@@ -1,6 +1,6 @@
 .footer-content {
     text-align: center;
-    margin: 30px 0px;
+    margin: 50px 0px;
 }
 
 .table {
@@ -48,4 +48,10 @@ table {
 
 th, td {
     border: 2px solid black;
+}
+
+.triangle-shape {
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }

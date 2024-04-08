@@ -27,7 +27,7 @@ function markingEarthquakeSpot(earthquakeData) {
   // marking process
   earthquakeData.forEach(earthquake => {
     var img_url = '';
-    if(earthquake.properties.mag < 8.5) img_url = './image/green_dark.png';
+    if(earthquake.properties.mag < 8.5) img_url = './image/darkgreen.png';
     else if(earthquake.properties.mag < 9) img_url = 'image/orange.png';
     else img_url = './image/red.png';
     // Create custom Icon - Color circle & Show mag Data
