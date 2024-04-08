@@ -30,7 +30,7 @@ function markingVolcanoSpot(volcanoData) {
     else if(volcano.colorCode == "YELLO") img_url = 'image/yellow.png';
     else if(volcano.colorCode == "RED") img_url = '/image/red.png';
     else if(volcano.colorCode == "ORANGE") img_url = '/image/orange.png'
-    else img_url = './image/white.png';
+    else img_url = './image/black.png';
     // Create custom Icon - Color circle & Show mag Data
     var customIcon = L.divIcon({
       className: 'custom-div-icon',
